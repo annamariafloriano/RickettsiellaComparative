@@ -34,8 +34,8 @@ ii. in both directories, the script searchKnumbers.py and the list Knumb.lst wer
 iii. intact.tsv and pseudos.tsv were put in a different directory where Integrate_ynTables.py. This script integrates the results into integrated_table.tsv, so that a "YES" in intact.tsv is a "YES" in integrated_table.tsv, a "NO" in intact.tsv is replaced by a "NO *" when a "YES" is found in pseudos.tsv, and a "NO" is printed in integrated_table.tsv when "NO" is found in both intact.tsv and pseudos.tsv. This script is simply run as: python3 Integrate_ynTables.py.
 
 STEP 6: Phylogenetic inferences.
-Phylogenomics: see 0_commands_phylogenomics.txt
-16S rRNA-based phylogeny: see 0_commands_16S.txt
+Phylogenomics: see 0_commands_phylogenomics.txt.
+16S rRNA-based phylogeny: see 0_commands_16S.txt. The obtained tree was opened in iTol to collapse tree branches not closely related to the target Rickettsiella strains, font and font size  
 Thiamine phylogenies: see 0_comm_thiamine.txt.
 
 STEP 7: Intersections of orthologs plots.
@@ -50,8 +50,11 @@ Each row represents a species, and each column represents a possible intersectio
 Filled circles indicate that the species in that row are part of the intersection shown in the corresponding column.
 The lines connecting the filled circles indicate which species are included in each specific intersection.
 
+STEP 8:
+OrthoFinder was run on the translated sequences all genes, intact genes, and pseudogenes of organisms belonging to different nodes of the phylogenomics tree. The obtained Orthogroups.GeneCount.tsv outputs were then analysed and plotted in R. Please see the Venn branch for the commands.
 
+STEP 9: A heatmap of specific metabolic pathways was created and plotted next to phylogenomics tree using the commands in the script 9_R_tree_htmap2.R.
 
-
+### The phylogenomics tree, the heatmap of step 9, and the Venn diagram of step 8 were merged into a single figure using Inkscape. Font and font size were also altered in Inkscape for clarity.
 
 
