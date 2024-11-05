@@ -1,0 +1,5 @@
+cifA	start	end	Apopt_START	Apopt_END	RNA_START	RNA_END
+wPipPel	1	503	25	93	202	398
+wMel	1	474	13	77	186	380
+Rickettsiella_Opha	1	797	0	0	236	513
+Rickettsiella_isopodorum	1	667	0	0	34	270
