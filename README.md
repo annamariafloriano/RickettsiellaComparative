@@ -55,6 +55,6 @@ OrthoFinder was run on the translated sequences all genes, intact genes, and pse
 
 STEP 9: A heatmap of specific metabolic pathways was created and plotted next to phylogenomics tree using the commands in the script 9_R_tree_htmap2.R (by Adil El-Filali).
 
-### The phylogenomics tree, the heatmap of step 9, and the Venn diagram of step 8 were merged into a single figure using Inkscape. Font and font size were also altered in Inkscape for clarity.
+The phylogenomics tree, the heatmap of step 9, and the Venn diagram of step 8 were merged into a single figure using Inkscape. Font and font size were also altered in Inkscape for clarity.
 
 
