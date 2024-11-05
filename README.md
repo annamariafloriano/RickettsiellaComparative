@@ -57,4 +57,7 @@ STEP 9: A heatmap of specific metabolic pathways was created and plotted next to
 
 The phylogenomics tree, the heatmap of step 9, and the Venn diagram of step 8 were merged into a single figure using Inkscape. Font and font size were also altered in Inkscape for clarity.
 
+STEP 10: Cytoplasmic incompatibility analysis.
+Please see the folder CI for details.
+
 
