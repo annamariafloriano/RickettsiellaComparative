@@ -34,6 +34,24 @@ ii. in both directories, the script searchKnumbers.py and the list Knumb.lst wer
 iii. intact.tsv and pseudos.tsv were put in a different directory where Integrate_ynTables.py. This script integrates the results into integrated_table.tsv, so that a "YES" in intact.tsv is a "YES" in integrated_table.tsv, a "NO" in intact.tsv is replaced by a "NO *" when a "YES" is found in pseudos.tsv, and a "NO" is printed in integrated_table.tsv when "NO" is found in both intact.tsv and pseudos.tsv. This script is simply run as: python3 Integrate_ynTables.py.
 
 STEP 6: Phylogenetic inferences.
+Phylogenomics: see 0_commands_phylogenomics.txt
+16S rRNA-based phylogeny: see 0_commands_16S.txt
+Thiamine phylogenies: see 0_comm_thiamine.txt.
+
+STEP 7: Intersections of orthologs plots.
+The plots were obtained with the R package UpSet (see 7_Commands_UpSet.R and 7_Commands_UpSet_PLOTALLINTERSECTIONS.R). The key components of these plots are:
+i. Horizontal Bar Plot (Left Side):
+	Each bar represents the total number of orthogroups present in each species.
+ii. Vertical Bar Plot (Top):
+	These bars represent the number of orthogroups that belong to specific intersections of species. The height of each bar indicates how many orthogroups are in that particular intersection (i.e., shared by those species).
+	Each bar represents the number of orthogroups that are shared by the combination of species indicated by the intersection matrix below.
+iii. Intersection Matrix (Bottom):
+Each row represents a species, and each column represents a possible intersection of those species.
+Filled circles indicate that the species in that row are part of the intersection shown in the corresponding column.
+The lines connecting the filled circles indicate which species are included in each specific intersection.
+
+
+
 
 
 
