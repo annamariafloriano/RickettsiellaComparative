@@ -1,0 +1,27 @@
+a=read.delim("blobplot.tab")
+sgc <- subset(a, a$gc<=0.45)
+sgccov <- subset(sgc, (sgc$cov_contigs.fasta.bowtie2.bam)>=2.5)
+b1 <- subset(sgccov, log10(sgccov$cov_contigs.fasta.bowtie2.bam)>=3.1)
+b1 <- subset(sgccov, log10(sgccov$cov_contigs.fasta.bowtie2.bam)<=3.1)
+b1
+b1$taxlevel_genus
+
+rick <- subset(a, a$taxlevel_order=="Rickettsiales")
+write.table(b1, file="Rickettsia.tab", sep="\t", quote=F. row.names=F)
+write.table(b1, file="Rickettsia.tab", sep="\t", quote=F, row.names=F)
+write.table(rick, file="Rickettsiales.tab", sep="\t", quote=F, row.names=F)
+
+b2 <- subset(sgccov, log10(sgccov$cov_contigs.fasta.bowtie2.bam)>=3.1)
+b2a <- subset(b2, log10(b2$cov_contigs.fasta.bowtie2.bam)<=3.5)
+b2b <- subset(b2, log10(b2$cov_contigs.fasta.bowtie2.bam)>=3.5)
+b2aB <- subset(b2a, b2a$taxlevel_superkingdom=="Bacteria")
+b2bB <- subset(b2b, b2b$taxlevel_superkingdom=="Bacteria")
+b2aB$taxlevel_genus
+b2bB$taxlevel_genus
+b2aB$taxlevel_genus
+write.table(b2a, file="RickettsiellaBlob.tab", sep="\t", quote=F, row.names=F)
+write.table(sgccov, file="3blobs.tab", sep="\t", quote=F, row.names=F)
+
+rickella <- subset(a, a$taxlevel_genus=="Rickettsiella")
+write.table(rickella, file="RickettsiellaTax.tab", sep="\t", quote=F, row.names=F)
+savehistory("Oerr_Rcomm_sel.txt")
