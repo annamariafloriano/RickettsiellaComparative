@@ -1,0 +1,18 @@
+a=read.delim("blobplot.tab")
+sl <- subset(a, log10(a$len)>=3.5 & a$gc<=0.5)
+write.table(sl, file="SelLen.tab", quote=F, row.names=F, sep="\t")
+sgc <- subset(a, a$gc<=0.4)
+sb1 <- subset(sgc, log10(a$cov_contigs.fasta.bowtie2.bam)>=2 & log10(a$cov_contigs.fasta.bowtie2.bam)<=2.5)
+sb2 <- subset(sgc, log10(a$cov_contigs.fasta.bowtie2.bam)>=3)
+sb1$taxlevel_order
+sb2$taxlevel_order
+sb2$taxlevel_genus
+sb1$taxlevel_genus
+
+write.table(sb2, file="HigherBlob.tab", quote=F, row.names=F, sep="\t")
+l <- subset(a, a$taxlevel_order=="Legionellales")
+write.table(l, file="LegionellalesTax.tab", quote=F, row.names=F, sep="\t")
+savehistory("Rickettsiella_Rcommands_sel.txt")
+
+
+
