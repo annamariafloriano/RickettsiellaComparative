@@ -35,7 +35,7 @@ iii. intact.tsv and pseudos.tsv were put in a different directory where Integrat
 
 STEP 6: Phylogenetic inferences.
 Phylogenomics: see 0_commands_phylogenomics.txt.
-16S rRNA-based phylogeny: see 0_commands_16S.txt. The obtained tree was opened in iTol to collapse tree branches not closely related to the target Rickettsiella strains, font and font size  
+16S rRNA-based phylogeny: see 0_commands_16S.txt. The obtained tree was opened in iTol to collapse tree branches not closely related to the target Rickettsiella strains, names were adjusted and font and font size were also modified. 
 Thiamine phylogenies: see 0_comm_thiamine.txt.
 
 STEP 7: Intersections of orthologs plots.
@@ -53,7 +53,7 @@ The lines connecting the filled circles indicate which species are included in e
 STEP 8:
 OrthoFinder was run on the translated sequences all genes, intact genes, and pseudogenes of organisms belonging to different nodes of the phylogenomics tree. The obtained Orthogroups.GeneCount.tsv outputs were then analysed and plotted in R. Please see the Venn branch for the commands.
 
-STEP 9: A heatmap of specific metabolic pathways was created and plotted next to phylogenomics tree using the commands in the script 9_R_tree_htmap2.R.
+STEP 9: A heatmap of specific metabolic pathways was created and plotted next to phylogenomics tree using the commands in the script 9_R_tree_htmap2.R (by Adil El-Filali).
 
 ### The phylogenomics tree, the heatmap of step 9, and the Venn diagram of step 8 were merged into a single figure using Inkscape. Font and font size were also altered in Inkscape for clarity.
 
