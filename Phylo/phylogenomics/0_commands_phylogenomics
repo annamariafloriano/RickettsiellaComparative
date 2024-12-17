@@ -1,0 +1,46 @@
+### Done on intact genes of Legionellales dataset + B. aphidicola genome.ffn (no pseudogene analysis for B. aphidicola)
+
+cd dataset/
+for i in *.ffn; do python3 ../renameFASTAheaders_byFilename.py -f $i > $i.ren.fa; done
+mkdir ori_files
+mv *.ffn ori_files/
+for i in *ren.fa; do seaview -convert -translate $i; done
+mkdir ren_ffn
+mv *.ren.fa ren_ffn/
+
+## rename manually .fst --> .fa
+cd ..
+python3 OrthoFinder_source/orthofinder.py -f dataset/
+cd dataset/OrthoFinder/
+mkdir Results_May16_analysis
+cp Results_May16/Orthogroups/Orthogroups.GeneCount.tsv Results_May16_analysis/
+cd Results_May16_analysis/
+## Get org.lst
+bash printMultLines.1.sh > rcomm.tmp ## 18
+paste -d " " org.lst rcomm.tmp > rcomm.txt ##manual modify
+## See Phylogenomics_Rcommands.txt
+## s1 - single copy panorthologs: 92
+cut -f 1 SingleCopyPan.tsv | sed '1d' > SingleCopyPan.lst
+bash printMultLines.2.sh > 1.tmp
+paste 1.tmp SingleCopyPan.lst > 2.tmp ## modify - remove \t and add .fa
+bash printMultLines.3.sh > 3.tmp
+paste -d " " 2.tmp 3.tmp > copy.sh
+mkdir SelClustersPan_aa
+bash copy.sh
+mkdir nt_dataset
+cp ../../ren_ffn/* nt_dataset/
+python3 GetNtClusters.py SelClustersPan_aa nt_dataset SelPanClusters_nt
+
+for i in SelPanClusters_nt/*.fa; do seaview -align -align_at_protein_level $i; done
+## rename .fst to .aln.fst to keep track
+mkdir data_nt_ren
+cp SelPanClusters_nt/*aln.fst data_nt_ren/
+for i in data_nt_ren/*aln.fst; do python3 changeHeaders.py $i $i.ren.fst; done
+rm data_nt_ren/*aln.fst
+
+ls data_nt_ren/* | cut -d "/" -f2 > nt_aln_files.lst ## manually modify this list to prepare it for the SeaView command
+seaview -concatenate OG0000104.aln.fst.ren.fst,OG0000107.aln.fst.ren.fst,OG0000108.aln.fst.ren.fst,OG0000109.aln.fst.ren.fst,OG0000110.aln.fst.ren.fst,OG0000114.aln.fst.ren.fst,OG0000115.aln.fst.ren.fst,OG0000118.aln.fst.ren.fst,OG0000119.aln.fst.ren.fst,OG0000120.aln.fst.ren.fst,OG0000122.aln.fst.ren.fst,OG0000123.aln.fst.ren.fst,OG0000125.aln.fst.ren.fst,OG0000127.aln.fst.ren.fst,OG0000129.aln.fst.ren.fst,OG0000130.aln.fst.ren.fst,OG0000131.aln.fst.ren.fst,OG0000132.aln.fst.ren.fst,OG0000133.aln.fst.ren.fst,OG0000135.aln.fst.ren.fst,OG0000139.aln.fst.ren.fst,OG0000140.aln.fst.ren.fst,OG0000142.aln.fst.ren.fst,OG0000144.aln.fst.ren.fst,OG0000145.aln.fst.ren.fst,OG0000147.aln.fst.ren.fst,OG0000148.aln.fst.ren.fst,OG0000150.aln.fst.ren.fst,OG0000151.aln.fst.ren.fst,OG0000153.aln.fst.ren.fst,OG0000154.aln.fst.ren.fst,OG0000156.aln.fst.ren.fst,OG0000157.aln.fst.ren.fst,OG0000158.aln.fst.ren.fst,OG0000159.aln.fst.ren.fst,OG0000160.aln.fst.ren.fst,OG0000161.aln.fst.ren.fst,OG0000162.aln.fst.ren.fst,OG0000163.aln.fst.ren.fst,OG0000164.aln.fst.ren.fst,OG0000166.aln.fst.ren.fst,OG0000167.aln.fst.ren.fst,OG0000168.aln.fst.ren.fst,OG0000169.aln.fst.ren.fst,OG0000170.aln.fst.ren.fst,OG0000171.aln.fst.ren.fst,OG0000174.aln.fst.ren.fst,OG0000175.aln.fst.ren.fst,OG0000176.aln.fst.ren.fst,OG0000177.aln.fst.ren.fst,OG0000178.aln.fst.ren.fst,OG0000179.aln.fst.ren.fst,OG0000180.aln.fst.ren.fst,OG0000181.aln.fst.ren.fst,OG0000182.aln.fst.ren.fst,OG0000183.aln.fst.ren.fst,OG0000184.aln.fst.ren.fst,OG0000185.aln.fst.ren.fst,OG0000186.aln.fst.ren.fst,OG0000188.aln.fst.ren.fst,OG0000189.aln.fst.ren.fst,OG0000190.aln.fst.ren.fst,OG0000191.aln.fst.ren.fst,OG0000192.aln.fst.ren.fst,OG0000193.aln.fst.ren.fst,OG0000194.aln.fst.ren.fst,OG0000195.aln.fst.ren.fst,OG0000196.aln.fst.ren.fst,OG0000197.aln.fst.ren.fst,OG0000198.aln.fst.ren.fst,OG0000199.aln.fst.ren.fst,OG0000200.aln.fst.ren.fst,OG0000201.aln.fst.ren.fst,OG0000202.aln.fst.ren.fst,OG0000203.aln.fst.ren.fst,OG0000204.aln.fst.ren.fst,OG0000205.aln.fst.ren.fst,OG0000206.aln.fst.ren.fst,OG0000207.aln.fst.ren.fst,OG0000208.aln.fst.ren.fst,OG0000209.aln.fst.ren.fst,OG0000210.aln.fst.ren.fst,OG0000211.aln.fst.ren.fst,OG0000212.aln.fst.ren.fst,OG0000213.aln.fst.ren.fst,OG0000214.aln.fst.ren.fst,OG0000215.aln.fst.ren.fst,OG0000218.aln.fst.ren.fst,OG0000219.aln.fst.ren.fst,OG0000220.aln.fst.ren.fst,OG0000221.aln.fst.ren.fst OG0000103.aln.fst.ren.fst
+mv OG0000103.aln.fst.ren_2.fst ../Pan_nt_concat.fst
+
+modeltest-ng -i Pan_nt_concat.fst -d nt -o Pan_nt_concat.fst.model -p 6 ## model according to AIC: GTR+I+G4
+raxmlHPC-PTHREADS -T 6 -f a -s Pan_nt_concat.fst -n Pan_nt_concat_GTRGAMMAIX.fst.boot -x 1234 -# 100 -p 123 -m GTRGAMMAIX

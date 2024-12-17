@@ -1,0 +1,11 @@
+a=read.delim("Orthogroups.GeneCount.tsv")
+s1 <- subset(a, a$Alusitana_GCF_003350455.1.ffn.ren ==1 & a$Baphidicola_GCF_003099975.1.ffn.ren ==1 & a$Baquae_GCF_001431295.2.ffn.ren ==1 & a$Bcookevillensis_GCF_001431315.2.ffn.ren ==1 & a$Cburnetii_RSA493_NC_002971.4.ffn.ren ==1 & a$CeAS_UFV_CP033868.ffn.ren ==1 & a$Coxiella_Omar.ffn.ren ==1 & a$Lpne_GCF_001753085.1.ffn.ren ==1 & a$RendoDgallinae_GCF_019285595.1.ffn.ren ==1 & a$Rgrylli_GCF_000168295.1.ffn.ren ==1 & a$Rickettsiella_Ir_d1.ffn.ren ==1 & a$Rickettsiella_Ir_d6.ffn.ren ==1 & a$Rickettsiella_Iric.ffn.ren ==1 & a$Rickettsiella_Oerr.ffn.ren ==1 & a$Rickettsiella_Opha.ffn.ren ==1 & a$Risopodorum_GCF_001881495.1.ffn.ren ==1 & a$Rmassiliensis_GCF_000257395.1.ffn.ren ==1 & a$Rviridis_GCF_003966755.1.ffn.ren ==1)
+s1
+length(s1$Total) ## 91
+s2 <- subset(a, a$Alusitana_GCF_003350455.1.ffn.ren  <=1 & a$Baphidicola_GCF_003099975.1.ffn.ren  <=1 & a$Baquae_GCF_001431295.2.ffn.ren  <=1 & a$Bcookevillensis_GCF_001431315.2.ffn.ren  <=1 & a$Cburnetii_RSA493_NC_002971.4.ffn.ren  <=1 & a$CeAS_UFV_CP033868.ffn.ren  <=1 & a$Coxiella_Omar.ffn.ren  <=1 & a$Lpne_GCF_001753085.1.ffn.ren  <=1 & a$RendoDgallinae_GCF_019285595.1.ffn.ren  <=1 & a$Rgrylli_GCF_000168295.1.ffn.ren  <=1 & a$Rickettsiella_Ir_d1.ffn.ren  <=1 & a$Rickettsiella_Ir_d6.ffn.ren  <=1 & a$Rickettsiella_Iric.ffn.ren  <=1 & a$Rickettsiella_Oerr.ffn.ren  <=1 & a$Rickettsiella_Opha.ffn.ren  <=1 & a$Risopodorum_GCF_001881495.1.ffn.ren  <=1 & a$Rmassiliensis_GCF_000257395.1.ffn.ren  <=1 & a$Rviridis_GCF_003966755.1.ffn.ren  <=1)
+s2s <- subset(s2, s2$Total >= 12 & s2$Total <= 18)
+length(s2s$Total) ## 552
+write.table(s1, file="SingleCopyPan.tsv", quote=F, row.names=F, sep="\t")
+write.table(s2s, file="SingleCopy70.tsv", quote=F, row.names=F, sep="\t")
+savehistory("Rcommands.txt")
+

@@ -1,0 +1,17 @@
+## after obtaining 16S sequences from SILVA (Diplorickettsiales); adding 16S from selected Legionellales and from our sequenced Rickettsiella strains (Ts changed to Us with SeaView):
+
+cat arb-silva.de_2024-05-16_id1326394_tax_silva_trunc.fasta otherLegio16S_U.fst > Legionellales16S.fasta
+grep ">" Legionellales16S.fasta | sed 's/>//g' > 16Sdataset.tab ## store the names in a different file
+python3 changeHeadersSilva.py Legionellales16S.fasta Legionellales16S.1.fasta.changeName.fasta
+cat Legionellales16S.1.fasta.changeName.fasta spiderRickettsiella.fasta > Legionellales16S.fasta.changeName.fasta
+
+
+## align with SeaView (muscle) : Legionellales16S_2.fasta.changeName.fst
+
+
+modeltest-ng -i Legionellales16S_2.fasta.changeName.fst -d nt -o Legionellales16S.fasta.changeName.fst.model -p 6 ## model according to AIC: GTR+I+G4
+raxmlHPC-PTHREADS -T 6 -f a -s Legionellales16S_2.fasta.changeName.fst -n Legionellales16S.fasta.changeNameGTRGAMMAIX.fst.boot -x 1234 -# 100 -p 123 -m GTRGAMMAIX
+
+
+
+

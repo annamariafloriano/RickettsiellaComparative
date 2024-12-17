@@ -1,0 +1,23 @@
+cd 1_thiD
+muscle -in 1_thiD.fasta -out 1_thiD.aln.faa
+##sed -E 's/^>.*\[([^]]+)\].*/>\1/; s/_//g' 1_thiD.aln.faa > 1_thiD.aln.faa.ren.fst ## change Oerr manually
+raxmlHPC-PTHREADS -T 6 -f a -s 1_thiD.aln.faa -n 1_thiD.aln.faa.boot -x 1234 -# 100 -p 123 -m PROTCATGTR
+cd ..
+cd 2_thiDE
+muscle -in 2_thiDE.fasta -out 2_thiDE.aln.faa
+raxmlHPC-PTHREADS -T 6 -f a -s 2_thiDE.aln.faa -n 2_thiDE.aln.faa.boot -x 1234 -# 100 -p 123 -m PROTCATGTR
+cd ..
+cd 3_thiO
+muscle -in 3_thiO.fasta -out 3_thiO.aln.faa
+raxmlHPC-PTHREADS -T 6 -f a -s 3_thiO.aln.faa -n 3_thiO.aln.faa.boot -x 1234 -# 100 -p 123 -m PROTCATGTR
+cd ..
+cd 4_thiG/
+muscle -in 4_thiG.fasta -out 4_thiG.aln.faa
+raxmlHPC-PTHREADS -T 6 -f a -s 4_thiG.aln.faa -n 4_thiG.aln.faa.boot -x 1234 -# 100 -p 123 -m PROTCATGTR
+cd ..
+cd 5_thiS/
+muscle -in 5_thiS.fasta -out 5_thiS.aln.faa
+raxmlHPC-PTHREADS -T 6 -f a -s 5_thiS.aln.faa -n 5_thiS.aln.faa.boot -x 1234 -# 100 -p 123 -m PROTCATGTR
+
+
+
