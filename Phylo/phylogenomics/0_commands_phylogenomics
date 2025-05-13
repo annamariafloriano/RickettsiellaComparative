@@ -1,4 +1,4 @@
-### Done on intact genes of Legionellales dataset + B. aphidicola genome.ffn (no pseudogene analysis for B. aphidicola)
+### Done on intact genes of Legionellales dataset + Methylococcus mesophilus strain 16-5
 
 cd dataset/
 for i in *.ffn; do python3 ../renameFASTAheaders_byFilename.py -f $i > $i.ren.fa; done
@@ -12,14 +12,14 @@ mv *.ren.fa ren_ffn/
 cd ..
 python3 OrthoFinder_source/orthofinder.py -f dataset/
 cd dataset/OrthoFinder/
-mkdir Results_May16_analysis
-cp Results_May16/Orthogroups/Orthogroups.GeneCount.tsv Results_May16_analysis/
-cd Results_May16_analysis/
+mkdir Results_May13_analysis
+cp Results_May13/Orthogroups/Orthogroups.GeneCount.tsv Results_May13_analysis/
+cd Results_May13_analysis/
 ## Get org.lst
 bash printMultLines.1.sh > rcomm.tmp ## 18
 paste -d " " org.lst rcomm.tmp > rcomm.txt ##manual modify
-## See Phylogenomics_Rcommands.txt
-## s1 - single copy panorthologs: 92
+## See Rcommands.R
+## s1 - single copy panorthologs: 109
 cut -f 1 SingleCopyPan.tsv | sed '1d' > SingleCopyPan.lst
 bash printMultLines.2.sh > 1.tmp
 paste 1.tmp SingleCopyPan.lst > 2.tmp ## modify - remove \t and add .fa
@@ -27,20 +27,20 @@ bash printMultLines.3.sh > 3.tmp
 paste -d " " 2.tmp 3.tmp > copy.sh
 mkdir SelClustersPan_aa
 bash copy.sh
-mkdir nt_dataset
-cp ../../ren_ffn/* nt_dataset/
-python3 GetNtClusters.py SelClustersPan_aa nt_dataset SelPanClusters_nt
 
-for i in SelPanClusters_nt/*.fa; do seaview -align -align_at_protein_level $i; done
+
+for i in SelClustersPan_aa/*.fa; do seaview -align $i; done
 ## rename .fst to .aln.fst to keep track
-mkdir data_nt_ren
-cp SelPanClusters_nt/*aln.fst data_nt_ren/
-for i in data_nt_ren/*aln.fst; do python3 changeHeaders.py $i $i.ren.fst; done
-rm data_nt_ren/*aln.fst
+mkdir data_aa_ren
+cp SelClustersPan_aa/*aln.fst data_aa_ren/
+for i in data_aa_ren/*aln.fst; do python3 changeHeaders.py $i $i.ren.fst; done
+rm data_aa_ren/*aln.fst
 
-ls data_nt_ren/* | cut -d "/" -f2 > nt_aln_files.lst ## manually modify this list to prepare it for the SeaView command
-seaview -concatenate OG0000104.aln.fst.ren.fst,OG0000107.aln.fst.ren.fst,OG0000108.aln.fst.ren.fst,OG0000109.aln.fst.ren.fst,OG0000110.aln.fst.ren.fst,OG0000114.aln.fst.ren.fst,OG0000115.aln.fst.ren.fst,OG0000118.aln.fst.ren.fst,OG0000119.aln.fst.ren.fst,OG0000120.aln.fst.ren.fst,OG0000122.aln.fst.ren.fst,OG0000123.aln.fst.ren.fst,OG0000125.aln.fst.ren.fst,OG0000127.aln.fst.ren.fst,OG0000129.aln.fst.ren.fst,OG0000130.aln.fst.ren.fst,OG0000131.aln.fst.ren.fst,OG0000132.aln.fst.ren.fst,OG0000133.aln.fst.ren.fst,OG0000135.aln.fst.ren.fst,OG0000139.aln.fst.ren.fst,OG0000140.aln.fst.ren.fst,OG0000142.aln.fst.ren.fst,OG0000144.aln.fst.ren.fst,OG0000145.aln.fst.ren.fst,OG0000147.aln.fst.ren.fst,OG0000148.aln.fst.ren.fst,OG0000150.aln.fst.ren.fst,OG0000151.aln.fst.ren.fst,OG0000153.aln.fst.ren.fst,OG0000154.aln.fst.ren.fst,OG0000156.aln.fst.ren.fst,OG0000157.aln.fst.ren.fst,OG0000158.aln.fst.ren.fst,OG0000159.aln.fst.ren.fst,OG0000160.aln.fst.ren.fst,OG0000161.aln.fst.ren.fst,OG0000162.aln.fst.ren.fst,OG0000163.aln.fst.ren.fst,OG0000164.aln.fst.ren.fst,OG0000166.aln.fst.ren.fst,OG0000167.aln.fst.ren.fst,OG0000168.aln.fst.ren.fst,OG0000169.aln.fst.ren.fst,OG0000170.aln.fst.ren.fst,OG0000171.aln.fst.ren.fst,OG0000174.aln.fst.ren.fst,OG0000175.aln.fst.ren.fst,OG0000176.aln.fst.ren.fst,OG0000177.aln.fst.ren.fst,OG0000178.aln.fst.ren.fst,OG0000179.aln.fst.ren.fst,OG0000180.aln.fst.ren.fst,OG0000181.aln.fst.ren.fst,OG0000182.aln.fst.ren.fst,OG0000183.aln.fst.ren.fst,OG0000184.aln.fst.ren.fst,OG0000185.aln.fst.ren.fst,OG0000186.aln.fst.ren.fst,OG0000188.aln.fst.ren.fst,OG0000189.aln.fst.ren.fst,OG0000190.aln.fst.ren.fst,OG0000191.aln.fst.ren.fst,OG0000192.aln.fst.ren.fst,OG0000193.aln.fst.ren.fst,OG0000194.aln.fst.ren.fst,OG0000195.aln.fst.ren.fst,OG0000196.aln.fst.ren.fst,OG0000197.aln.fst.ren.fst,OG0000198.aln.fst.ren.fst,OG0000199.aln.fst.ren.fst,OG0000200.aln.fst.ren.fst,OG0000201.aln.fst.ren.fst,OG0000202.aln.fst.ren.fst,OG0000203.aln.fst.ren.fst,OG0000204.aln.fst.ren.fst,OG0000205.aln.fst.ren.fst,OG0000206.aln.fst.ren.fst,OG0000207.aln.fst.ren.fst,OG0000208.aln.fst.ren.fst,OG0000209.aln.fst.ren.fst,OG0000210.aln.fst.ren.fst,OG0000211.aln.fst.ren.fst,OG0000212.aln.fst.ren.fst,OG0000213.aln.fst.ren.fst,OG0000214.aln.fst.ren.fst,OG0000215.aln.fst.ren.fst,OG0000218.aln.fst.ren.fst,OG0000219.aln.fst.ren.fst,OG0000220.aln.fst.ren.fst,OG0000221.aln.fst.ren.fst OG0000103.aln.fst.ren.fst
-mv OG0000103.aln.fst.ren_2.fst ../Pan_nt_concat.fst
+ls data_aa_ren/* | cut -d "/" -f2 > aa_aln_files.lst ## manually modify this list to prepare it for the SeaView command
+cd data_aa_ren
+seaview -concatenate OG0000123.aln.fst.ren.fst,OG0000124.aln.fst.ren.fst,OG0000125.aln.fst.ren.fst,OG0000126.aln.fst.ren.fst,OG0000128.aln.fst.ren.fst,OG0000130.aln.fst.ren.fst,OG0000131.aln.fst.ren.fst,OG0000132.aln.fst.ren.fst,OG0000139.aln.fst.ren.fst,OG0000140.aln.fst.ren.fst,OG0000141.aln.fst.ren.fst,OG0000142.aln.fst.ren.fst,OG0000143.aln.fst.ren.fst,OG0000144.aln.fst.ren.fst,OG0000145.aln.fst.ren.fst,OG0000146.aln.fst.ren.fst,OG0000147.aln.fst.ren.fst,OG0000149.aln.fst.ren.fst,OG0000150.aln.fst.ren.fst,OG0000152.aln.fst.ren.fst,OG0000153.aln.fst.ren.fst,OG0000154.aln.fst.ren.fst,OG0000155.aln.fst.ren.fst,OG0000156.aln.fst.ren.fst,OG0000157.aln.fst.ren.fst,OG0000158.aln.fst.ren.fst,OG0000161.aln.fst.ren.fst,OG0000163.aln.fst.ren.fst,OG0000165.aln.fst.ren.fst,OG0000167.aln.fst.ren.fst,OG0000169.aln.fst.ren.fst,OG0000171.aln.fst.ren.fst,OG0000172.aln.fst.ren.fst,OG0000173.aln.fst.ren.fst,OG0000174.aln.fst.ren.fst,OG0000176.aln.fst.ren.fst,OG0000177.aln.fst.ren.fst,OG0000178.aln.fst.ren.fst,OG0000179.aln.fst.ren.fst,OG0000180.aln.fst.ren.fst,OG0000181.aln.fst.ren.fst,OG0000182.aln.fst.ren.fst,OG0000185.aln.fst.ren.fst,OG0000186.aln.fst.ren.fst,OG0000187.aln.fst.ren.fst,OG0000188.aln.fst.ren.fst,OG0000190.aln.fst.ren.fst,OG0000191.aln.fst.ren.fst,OG0000192.aln.fst.ren.fst,OG0000193.aln.fst.ren.fst,OG0000194.aln.fst.ren.fst,OG0000195.aln.fst.ren.fst,OG0000196.aln.fst.ren.fst,OG0000199.aln.fst.ren.fst,OG0000200.aln.fst.ren.fst,OG0000202.aln.fst.ren.fst,OG0000204.aln.fst.ren.fst,OG0000205.aln.fst.ren.fst,OG0000206.aln.fst.ren.fst,OG0000207.aln.fst.ren.fst,OG0000208.aln.fst.ren.fst,OG0000209.aln.fst.ren.fst,OG0000210.aln.fst.ren.fst,OG0000211.aln.fst.ren.fst,OG0000212.aln.fst.ren.fst,OG0000213.aln.fst.ren.fst,OG0000214.aln.fst.ren.fst,OG0000215.aln.fst.ren.fst,OG0000216.aln.fst.ren.fst,OG0000217.aln.fst.ren.fst,OG0000219.aln.fst.ren.fst,OG0000220.aln.fst.ren.fst,OG0000221.aln.fst.ren.fst,OG0000223.aln.fst.ren.fst,OG0000224.aln.fst.ren.fst,OG0000225.aln.fst.ren.fst,OG0000226.aln.fst.ren.fst,OG0000227.aln.fst.ren.fst,OG0000228.aln.fst.ren.fst,OG0000229.aln.fst.ren.fst,OG0000231.aln.fst.ren.fst,OG0000232.aln.fst.ren.fst,OG0000233.aln.fst.ren.fst,OG0000234.aln.fst.ren.fst,OG0000235.aln.fst.ren.fst,OG0000236.aln.fst.ren.fst,OG0000237.aln.fst.ren.fst,OG0000238.aln.fst.ren.fst,OG0000239.aln.fst.ren.fst,OG0000240.aln.fst.ren.fst,OG0000241.aln.fst.ren.fst,OG0000242.aln.fst.ren.fst,OG0000243.aln.fst.ren.fst,OG0000244.aln.fst.ren.fst,OG0000245.aln.fst.ren.fst,OG0000246.aln.fst.ren.fst,OG0000247.aln.fst.ren.fst,OG0000248.aln.fst.ren.fst,OG0000249.aln.fst.ren.fst,OG0000250.aln.fst.ren.fst,OG0000251.aln.fst.ren.fst,OG0000252.aln.fst.ren.fst,OG0000253.aln.fst.ren.fst,OG0000256.aln.fst.ren.fst,OG0000257.aln.fst.ren.fst,OG0000258.aln.fst.ren.fst,OG0000259.aln.fst.ren.fst,OG0000260.aln.fst.ren.fst OG0000116.aln.fst.ren.fst
+mv OG0000116.aln.fst.ren_2.fst ../Pan_aa_concat.fst
+cd ..
 
-modeltest-ng -i Pan_nt_concat.fst -d nt -o Pan_nt_concat.fst.model -p 6 ## model according to AIC: GTR+I+G4
-raxmlHPC-PTHREADS -T 6 -f a -s Pan_nt_concat.fst -n Pan_nt_concat_GTRGAMMAIX.fst.boot -x 1234 -# 100 -p 123 -m GTRGAMMAIX
+modeltest-ng -i Pan_aa_concat.fst -d aa -o Pan_aa_concat.fst.model -p 6 ## model according to AIC: LG+I+G4
+raxmlHPC-PTHREADS -T 6 -f a -s Pan_aa_concat.fst -n Pan_aa_concat_PROTGAMMAILG.fst.nwk -x 1234 -# 1000 -p 123 -m PROTGAMMAILG
