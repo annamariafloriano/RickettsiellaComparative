@@ -1,0 +1,23 @@
+#### For the creation of the barplot of virulence factors (Figure 4). 
+### Supplementary Table 6 was converted into a simple presence/absence table where 0 corresponds to the states "absent" and "pseudogene", and 1 corresponds to the state "present". The total number of components per each category was added in the column "Tot_Category"
+### The plot has been modified in Inkscape to adjust font, font size, figure size.
+## install.packages("reshape2")
+
+library(reshape2)
+
+df <- read.table("file.tsv", check.names = FALSE, header=T) # load the data
+
+df_long <- melt(df, id.vars = c("Category", "Tot_Category"), variable.name = "Organism", value.name = "Count") # reshape to long format
+df_long$RelPct <- (df_long$Count / df_long$Tot_Category) * 100 # calculate the percentage for category
+percent_matrix <- xtabs(RelPct ~ Category + Organism, data = df_long) # Create a matrix with percentages per Category (rows) and Organism (columns)
+
+# Production of the barplot:
+pdf("grouped_barplot_percent_by_category.pdf", width = 12, height = 6) # to save the plot
+par(mar = c(10, 4, 4, 10), xpd = TRUE) # adjust plot margins
+# create the barplot using the rainbow palette
+barplot(t(percent_matrix), beside = TRUE, col = rainbow(ncol(percent_matrix)),
+        las = 2, ylim = c(0, 100),
+        main = "Organism Contribution to Each Category (%)",
+        xlab = "Categories", ylab = "Percentage of Category")
+legend("topright", inset = c(-0.25, 0), legend = colnames(percent_matrix), fill = rainbow(ncol(percent_matrix)), cex = 0.5) # add a legend
+dev.off() # close PDF device
